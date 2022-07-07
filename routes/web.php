@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,3 +32,12 @@ Route::get('/param/{id?}', function ($id=0) {
 //->whereAlpha('id')
 //->where('id','[0-9]+') // you can use regex like this or the one above
 ;
+/**
+ * Route with prefixe 
+ */
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/user/{id}', function () {
+        return "Get a user";
+    });
+    Route::get('/users',[UserController::class,'index'])->name('all_user');
+});
